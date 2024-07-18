@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+}
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: maven
+    image: maven:3.9.8-eclipse-temurin-17
+    command:
+    - sleep
+    args:
+    - infinity
+'''
+        }
+    }
+    stages {
+        stage('Main') {
+            steps {
+                container('maven'){
+                    step{
+                        sh 'mvn -Dmaven.test.failure.ignore=true install'
+                    }
+                }
+            }
+        }
+    }
+}
