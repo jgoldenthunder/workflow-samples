@@ -20,9 +20,7 @@ spec:
         stage('Main') {
             steps {
                 container('maven'){
-                    step{
-                        sh 'mvn -Dmaven.test.failure.ignore=true install'
-                    }
+                    sh 'mvn -Dmaven.test.failure.ignore=true install'
                 }
             }
         }
